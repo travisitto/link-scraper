@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<body>
+    <style>
+        .result {
+    display: grid;
+    flex-direction: column;
+    margin-top: 50px;
+}.result a {
+    border: 1px solid #000;
+}
+    </style>
+    <div style="max-width: 800px;margin:0 auto">
+<input type="text" id="myInput">
+<button type="button" id="myBtn">Get links</button>
+<button id="refresh">Reload</button>    
+
+<div class="result">
+</div>
+
+</div>
+</body>
+
+<script>
+$('#refresh').click(function() {
+    location.reload();
+});    
+
+
+</script>
+    <script>
+
+
+
+        $(document).ready(function(){
+    // Get value on button click and show alert
+    var temp1 = '<ul>';
+    $("#myBtn").click(function(){
+        
+        var str = $("#myInput").val();
+    $.get(str, function(html) {
+        $(html).find('a[target="_blank"]').each(function() {       
+            var href = $(this).attr('href');
+            var relref = $(this).attr('rel');
+            console.log(this);
+            var ifnoopener = false;
+            if(relref == 'noopener'){
+                ifnoopener = true;
+            }
+            var outTemp = '<li><a href="'+href+'">' + href+'</a> - noopener:'+ifnoopener+'</li>';
+            temp1+= outTemp;
+    });
+    temp1+= '</ul>';
+    $('.result').html('').append(temp1);
+ 
+
+     });
+});
+    });
+    
+    
+    </script>
+
+  
+</html>
