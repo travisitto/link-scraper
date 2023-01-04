@@ -50,7 +50,7 @@ $('#refresh').click(function() {
             var relref = $(this).attr('rel');
             console.log(this);
             var ifnoopener = false;
-            if(relref == 'noopener'){
+            if(relref == 'noopener' || 'noreferrer'){
                 ifnoopener = true;
             }
             var outTemp = '<li><a href="'+href+'">' + href+'</a> - noopener:'+ifnoopener+'</li>';
